@@ -1,5 +1,7 @@
 import java.awt.Color;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Class BallDemo - a short demonstration showing animation with the 
  * Canvas class. 
@@ -37,12 +39,21 @@ public class BallDemo
         //ball.draw();
         //BouncingBall ball2 = new BouncingBall(70, 80, 20, Color.RED, ground, myCanvas);
         //ball2.draw();
-        HashSet<BouncingBall> balls = new HashSet<BouncingBall>();
+        ArrayList<BouncingBall> balls = new ArrayList<>();
 
         for(int i=0; i <numBolas; i++)
 
         {
-            BouncingBall ball = new BouncingBall(50+32*i,50, 16, Color.blue, ground, myCanvas);
+            Random random = new Random();
+            int radio = random.nextInt(100);
+            
+            int red = random.nextInt(256);
+            int green = random.nextInt(256);
+            int blue = random.nextInt(256);
+            
+            int x = random.nextInt(240);
+            int y = random.nextInt(400);
+            BouncingBall ball = new BouncingBall(x, y, radio, new Color(blue,red,green), ground, myCanvas);
 
             balls.add(ball);
             ball.draw();
@@ -57,14 +68,13 @@ public class BallDemo
                 ball.move();
                 
                 // stop once ball has travelled a certain distance on x axis
-                if(ball.getXPosition() >= 550 + 32 * numBolas) {
+                if(ball.getXPosition() >= 550) {
                     finished = true;
                 }
             }
         }
         
-        for(BouncingBall ball : balls){
-            ball.erase();
-        }
+        
     }
 }
+
